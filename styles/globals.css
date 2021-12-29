@@ -1,9 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+2:wght@400;600&display=swap');
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'M PLUS 2', 'Roboto', sans-serif;
 }
 
 a {
@@ -13,4 +14,211 @@ a {
 
 * {
   box-sizing: border-box;
+}
+.global-link {
+  cursor: pointer;
+}
+.global-inline {
+  display: inline-block;
+}
+.global-category-header {
+  font-size: 32px;
+  font-weight: bold;
+}
+li {
+  list-style: none;
+}
+.navbar-main ul {
+  display: flex;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.navbar-main {
+  display: flex;
+  width: 100%;
+  background-color: #eee;
+  justify-content: space-between;
+}
+.navbar-main ul:first-child {
+  justify-content: flex-start;
+}
+.navbar-main ul:last-child {
+  justify-content: flex-end;
+}
+.channel-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0 10px 0 10px;
+}
+.channel-channelinfo {
+  width: 30%;
+  padding: 10px 10px 0 10px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.channel-videolist {
+  width: 70%;
+  padding: 0px 10px 0 10px;
+}
+.videopreview-container {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-self: flex-start;
+  padding: 10px;
+}
+.videopreview-thumbnailcontainer {
+  margin: 0;
+  padding: 0;
+}
+.videopreview-statistics {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+}
+.videopreview-title {
+  margin: 0;
+  padding: 0;
+}
+.videopreview-statistics-viewcount {
+  padding: 0;
+  width: 50%;
+  display: flex;
+  justify-content: flex-start;
+}
+.videopreview-statistics-likedislike {
+  padding: 0;
+  width: 25%;
+  display: flex;
+  justify-content: space-between;
+}
+.videopreview-title-format {
+  font-weight: bold;
+}
+.video-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.video-main-container {
+  display: flex;
+  flex-direction: row;
+  width: 75%;
+}
+.video-sidebar-container {
+  display: flex;
+  flex-direction: row;
+  width: 25%;
+}
+.video-main-title-format {
+  font-weight: bold;
+  font-size: 20px;
+}
+.video-main-ownerinfo {
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+}
+.video-main-statistics {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0;
+}
+.video-main-container-format {
+  padding: 0;
+  width: 100%;
+}
+.video-videoembed-container {
+  width: 100%;
+}
+.video-main-statistics-left {
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  width: 30%;
+}
+.video-main-statistics-right {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  padding: 0;
+  width: 30%;
+}
+.video-main-statistics-right li {
+  margin: 0 10px 0 10px;
+}
+.video-main-statistics-ratiobar-container {
+  width: 100%;
+  background-color: #ff0000;
+  height: 10px;
+}
+.video-main-statistics-ratiobar-likes {
+  height: 10px;
+  background-color: #00ff00;
+}
+.video-main-statistics-left li {
+  margin-right: 10px;
+}
+.video-main-ownerinfo li {
+  margin-right: 10px;
+}
+.video-main-ownerinfo-date {
+  margin-left: auto;
+}
+.channel-channelinfo-identity {
+  padding: 0;
+  margin: 0;
+}
+.channel-channelinfo-statistics {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.channel-channelinfo-description {
+  padding: 0;
+  margin: 0;
+}
+.channel-channelinfo-identity-name {
+  font-size: 24px;
+  font-weight: bold;
+}
+.channel-videolist-videos {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.channel-videolist-header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 10px 0 10px;
+  align-items: center;
+}
+.notfound {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+}
+.channel-channelinfo-identity-namesub {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
