@@ -30,6 +30,7 @@ export interface YTVideo {
         likeCount: number
         dislikeCount: number
         commentCount: number
+        likeDislikeRatio?: number
     }
     status: {
         privacyStatus: string

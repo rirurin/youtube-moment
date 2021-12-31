@@ -22,8 +22,8 @@ export const countryCodeToEmoji = (cc:string) => {
 export const likeDislikeRatio = (likes:string, dislikes:string) => {
     const [ likeN, dislikeN ] = [parseInt(likes), parseInt(dislikes)]
     if (dislikeN == 0) {
-        return 100
+        return 1
     } else {
-        return ((1 - 1 /(likeN / dislikeN)) * 100).toFixed(2)
+        return ((1 - 1 /(likeN / dislikeN))).toFixed(4)
     }
 }

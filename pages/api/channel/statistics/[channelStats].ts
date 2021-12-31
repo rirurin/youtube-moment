@@ -19,6 +19,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         case "GET" : {
             return getChannelStats(req, res)
         }
+        case "POST" : {
+            return getChannelStatsUsingEmail(req, res)
+        }
         default: {
             return getChannelStats(req, res)
         }
@@ -34,6 +37,36 @@ async function getChannelStats (req: NextApiRequest, res: NextApiResponse) {
         // Get channel information from channels category
         let posts = await db.collection("channels").findOne({
             channelId: vidId.channelStats
+        })
+        if (JSON.parse(JSON.stringify(posts))) {
+            // Channel found
+            return res.json({
+                message: JSON.parse(JSON.stringify(posts)),
+                success: true
+            })
+        } else {
+            // Channel not found
+            throw new Error("This user's information isn't stored on this site (yet)")
+        }
+    } catch (error:any) {
+        return res.json({
+            message: new Error(error).message,
+            success: false
+        })
+    }
+}
+// POST request, used on the homepage/dashboard to retrieve information for a channel based on the session's email account
+async function getChannelStatsUsingEmail (req: NextApiRequest, res: NextApiResponse) {
+    try {
+        // Connect to DB
+        let { db } = await connectToDatabase()
+        vidId = req.query
+        // Get channel information from channels category
+        let getChannelId = await db.collection("identites").findOne({
+            email: vidId.channelStats
+        })
+        let posts = await db.collection("channels").findOne({
+            channelId: getChannelId.channelId
         })
         if (JSON.parse(JSON.stringify(posts))) {
             // Channel found

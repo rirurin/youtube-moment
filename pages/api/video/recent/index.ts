@@ -1,15 +1,12 @@
 import { NextApiRequest, NextApiResponse } from "next"
-import { connectToDatabase } from "../../../lib/mongodb"
+import { connectToDatabase } from "../../../../lib/mongodb"
 
 let vidId:any
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     try {
         let { db } = await connectToDatabase()
-        vidId = req.query
-        let video = await db.collection("videos").findOne({
-            'properties.videoId': vidId.videos
-        })
+        let video = await db.collection("videos").find({}).limit(10).toArray()
         if (JSON.parse(JSON.stringify(video))) {
             // Video found
             return res.json({

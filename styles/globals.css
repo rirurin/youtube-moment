@@ -17,9 +17,13 @@ a {
 }
 .global-link {
   cursor: pointer;
+  color: #e6150e;
 }
 .global-inline {
   display: inline-block;
+}
+.global-bold {
+  font-weight: bold;
 }
 .global-category-header {
   font-size: 32px;
@@ -46,6 +50,9 @@ li {
 .navbar-main ul:last-child {
   justify-content: flex-end;
 }
+.navbar-image {
+  height: 1.5em;
+}
 .channel-container {
   width: 100%;
   display: flex;
@@ -71,7 +78,7 @@ li {
   justify-content: center;
   flex-direction: column;
   align-self: flex-start;
-  padding: 10px;
+  padding: 10px 25px 10px 25px;
 }
 .videopreview-thumbnailcontainer {
   margin: 0;
@@ -221,4 +228,61 @@ li {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+}
+.dashboard-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0 10px 0 10px;
+}
+.dashboard-header-container, 
+.listchannel-header-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 25px;
+}
+.dashboard-main-container,
+.listchannel-main-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.dashboard-account-info-noupload {
+  width: 30%;
+  padding: 10px 25px 10px 25px;
+}
+.dashboard-upload-information {
+  width: 70%;
+  padding: 10px 25px 10px 25px;
+}
+.dashboard-account-info-noupload-container,
+.dashboard-upload-information-title-container,
+.dashboard-upload-information-notes,
+.dashboard-upload-information-checkbox,
+.dashboard-upload-information-uploadbutton {
+  margin: 0;
+  padding: 0;
+}
+.dashboard-upload-information-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+.dashboard-account-info-noupload-image,
+.dashboard-account-info-upload-image {
+  width: 96px
+}
+.dashboard-account-info-noupload-name,
+.dashboard-account-info-upload-name {
+  font-weight: bold;
+}
+.dashboard-upload-information-title-container {
+  margin: 0 0 10px 0
+}
+.dashboard-upload-information-notes li {
+  margin: 0 0 10px 0
+}
+.dashboard-upload-information-checkbox {
+  margin: 0 0 10px 0
 }

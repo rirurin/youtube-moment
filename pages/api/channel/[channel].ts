@@ -6,10 +6,10 @@ import { ObjectID } from "bson"
 import axios from "axios"
 import { YTVideo, YTImage, YTChannel, YTIdentity, YTChannelStatistics, YTVideoStatistics, YTVideoStatisticsBody } from "../../../types"
 import { Session } from "next-auth"
+import { likeDislikeRatio } from "../../components/functions"
 
 let accessToken:any
 let vidId:any
-let HTTPStatus:number
 let refreshToken:any
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -61,6 +61,9 @@ async function getChannel (req: NextApiRequest, res: NextApiResponse) {
                 break
             case "dislikes":
                 videoSort = {'statistics.dislikeCount': -1}
+                break
+            case "ratio":
+                videoSort = {'statistics.likeDislikeRatio': -1}
                 break
             default:
                 throw new Error(`Not a sorting type that exists in this API at this second`)
@@ -125,11 +128,9 @@ async function ownerUpdateChannel (req: NextApiRequest, res: NextApiResponse) {
             }
         } else {
             // User not logged in
-            HTTPStatus = 403
             throw new Error("bro you're not allowed to do this unless you're logged in /ban")
         }
         return res.json({
-            //message: JSON.parse(JSON.stringify(posts)),
             message: "Data successfully imported",
             //message: data,
             success: true
@@ -219,6 +220,7 @@ const formatVideoDataToAPI:any = (input:any, thumbnail:YTImage[]) => {
             likeCount: Number(input.statistics.likeCount),
             dislikeCount: Number(input.statistics.dislikeCount),
             commentCount: Number(input.statistics.commentCount),
+            likeDislikeRatio: Number(likeDislikeRatio(input.statistics.likeCount, input.statistics.dislikeCount)),
         },
         status: {
             privacyStatus: input.status.privacyStatus,
@@ -283,7 +285,6 @@ async function updateOwnUserInfo(mongoDatabase:any, session:Session, newUser:boo
     // Fetch from search (100 QUOTA POINTS)
     const channelVideos = await getYTChannelData(pageToken, 50)
 
-    //const videoIds = []
     const channelVideoList:YTVideo[] = []
     const channelVideosListShort = []
     for (let i in channelVideos.items) {
@@ -295,19 +296,9 @@ async function updateOwnUserInfo(mongoDatabase:any, session:Session, newUser:boo
         const videoStatistics = formatVideoStatisticsDatatoAPI(videoData[0].statistics, videoData[0].id)
         channelVideosListShort.push(videoData[0].id)
         await mongoDatabase.collection("statistics").insertOne(videoStatistics)
-        console.log(`${i}: Video ${channelVideos.items[i].id.videoId} was added to the API: Youtube owned by epic dislike counter`)
+        console.log(`[${i}] [ VIDEO ${channelVideos.items[i].id.videoId} ]: Added to the API: Youtube owned by epic dislike counter`)
     }
     // Build channel object
-    if (!pageToken) {
-        // new channel request, make channel object
-    } else {
-        // channel already exists, add onto channel object
-        /*
-        await mongoDatabase.collection("channels").findOne({
-            channelId: channelInfo[0].id
-        })
-        */
-    }
     const res:YTChannel = {
         indexedDate: new Date(),
         channelName: channelInfo[0].snippet.title,
@@ -332,7 +323,7 @@ async function updateOwnUserInfo(mongoDatabase:any, session:Session, newUser:boo
     } else {
         try {
             await mongoDatabase.collection("channels").insertOne(res)
-            console.log(`Channel ${res.channelId} was added to the API. ${res.channelName} is based as hell`)
+            console.log(`[ CHANNEL ${res.channelId} ]: Added to the API. ${res.channelName} is based as hell`)
         } catch (err) {
             console.log("Unable to import data into the channel: Channel failed the vibe check")
         }

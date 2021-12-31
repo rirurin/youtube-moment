@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from "next/link"
 import { useSession, signIn, signOut, getSession } from 'next-auth/react'
 
 interface mongoProps {
@@ -12,12 +13,13 @@ export default function Nav(props: mongoProps) {
         return (
             <nav className="navbar-main">
                 <ul className="navbar-sitenav">
-                    <li>name</li>
+                    <Link href={`/`}><li className='global-link global-bold'>name</li></Link>
                     <li>Search for video</li>
                 </ul>
                 <ul className="navbar-userinfo">
+                    <li><img className="navbar-image" src={session.user?.image}/></li>
                     <li>{session.user?.name}</li>
-                    <li><img src={session.user?.image}/></li>
+                    <li><button onClick={() => signOut()}>Sign Out</button></li>
                 </ul>
             </nav>
         )

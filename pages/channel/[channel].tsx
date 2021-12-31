@@ -1,12 +1,12 @@
-import axios from "axios";
-import { GetServerSideProps, GetStaticPaths, GetStaticProps, InferGetServerSidePropsType } from "next";
-import { useSession } from "next-auth/react";
+import axios from "axios"
+import { GetServerSideProps, GetStaticPaths, GetStaticProps, InferGetServerSidePropsType } from "next"
+import { useSession } from "next-auth/react"
 import { YTVideo } from "../../types"
 import Image from "next/image"
 import Link from "next/link"
 import { Icon } from "@iconify/react"
-import { formatTimeSinceRelease, formatDateAsLocale, countryCodeToEmoji } from "../components/functions";
-import { useEffect, useState, useRef, useCallback } from "react";
+import { formatTimeSinceRelease, formatDateAsLocale, countryCodeToEmoji } from "../components/functions"
+import { useEffect, useState, useRef, useCallback } from "react"
 
 export default function videoPageContents ({ user }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     const [videos, setVideos] = useState<YTVideo[]>([])
@@ -16,7 +16,7 @@ export default function videoPageContents ({ user }: InferGetServerSidePropsType
     const [order, setOrder] = useState("new")
     
     useEffect(() => {
-        loadVideos();
+        loadVideos()
       }, []);
       
     async function loadVideos() {
@@ -65,7 +65,7 @@ export default function videoPageContents ({ user }: InferGetServerSidePropsType
                                 <option value="viewcount" onClick={function(e:any){setVideos([]); setPage(0); setLoadMore(true); setOrder("views")}}>Views</option>
                                 <option value="likecount" onClick={function(e:any){setVideos([]); setPage(0); setLoadMore(true); setOrder("likes")}}>Likes</option>
                                 <option value="dislikecount" onClick={function(e:any){setVideos([]); setPage(0); setLoadMore(true); setOrder("dislikes")}}>Dislikes</option>
-                                <option value="likedislikecount">Like/Dislike Ratio</option>
+                                <option value="likedislikecount" onClick={function(e:any){setVideos([]); setPage(0); setLoadMore(true); setOrder("ratio")}}>Like/Dislike Ratio</option>
                             </select>
                         </li>
                         <li>{videos.length} out of {user.message?.videos.length} videos loaded</li>

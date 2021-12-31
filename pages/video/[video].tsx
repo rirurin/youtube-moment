@@ -5,7 +5,7 @@ import { formatTimeSinceRelease, formatDateAsLocale, likeDislikeRatio } from "..
 import { Icon } from "@iconify/react"
 import Link from "next/link"
 
-export default function videoPageContents ({ user }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function videoPageContents ({ user, stats }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     const {data: session, status} = useSession()
     if (status === "loading") {
         return <>loading</>
@@ -21,7 +21,7 @@ export default function videoPageContents ({ user }: InferGetServerSidePropsType
                         </li>
                         <li className="video-main-title-format">{user.message?.properties.videoTitle}</li>
                         <ul className="video-main-ownerinfo">
-                            <li>Published by <Link href={`../channel/${user.message?.properties.channelId}`}><div className="global-link global-inline">{user.message?.properties.channelTitle}</div></Link></li>
+                            <li>Published by <Link href={`../channel/${user.message?.properties.channelId}`}><div className="global-link global-inline global-bold">{user.message?.properties.channelTitle}</div></Link></li>
                             <li>{user.message?.status.privacyStatus}</li>
                             <li className="video-main-ownerinfo-date">Released {formatDateAsLocale(user.message?.properties.publishDate)}</li>
                         </ul>
@@ -35,10 +35,10 @@ export default function videoPageContents ({ user }: InferGetServerSidePropsType
                                 <li><Icon icon="carbon:thumbs-down-filled" inline={true} /> {user.message?.statistics.dislikeCount}</li>
                                 <li>
                                     <Icon icon="carbon:chart-pie" inline={true} /> 
-                                    {likeDislikeRatio(user.message?.statistics.likeCount, user.message?.statistics.dislikeCount)}%
+                                    {Number(likeDislikeRatio(user.message?.statistics.likeCount, user.message?.statistics.dislikeCount)) * 100}%
                                 </li>
                                 <div className="video-main-statistics-ratiobar-container">
-                                    <div className="video-main-statistics-ratiobar-likes" style={{width: likeDislikeRatio(user.message?.statistics.likeCount, user.message?.statistics.dislikeCount) + "%"}}></div>
+                                    <div className="video-main-statistics-ratiobar-likes" style={{width: (Number(likeDislikeRatio(user.message?.statistics.likeCount, user.message?.statistics.dislikeCount)) * 100) + "%"}}></div>
                                 </div>
                             </ul>
                         </ul>
